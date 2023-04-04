@@ -1,2 +1,9 @@
-
+<div>
+    <label for="year-select">Filter by Year:</label>
+    <select id="year-select">
+      <option value="">All Years</option>
+      <option *ngFor="let year of years" [value]="year">{{ year }}</option>
+    </select>
+</div>
+  
   

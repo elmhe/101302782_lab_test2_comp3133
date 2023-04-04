@@ -1,8 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { Location } from '@angular/common';
-import { SpaceXLaunch } from '../models/mission';
-
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-missiondetails',
@@ -11,7 +7,6 @@ import { SpaceXLaunch } from '../models/mission';
 })
 
 export class MissiondetailsComponent {
-  
-  // @Input() launch: SpaceXLaunch ;
+  @Input() missionDetails: any;
 
 }

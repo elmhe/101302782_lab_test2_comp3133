@@ -1,6 +1,9 @@
-<!-- <div *ngIf="launch">
-    <h2>{{ launch.mission_name }}</h2>
-    <p><strong>Launch Year:</strong> {{ launch.launch_year }}</p>
-    <p><strong>Details:</strong> {{ launch.details }}</p>
-    <img [src]="launch.links.mission_patch_small" alt="{{ launch.mission_name }} Patch" />
-</div>  -->
+<h2>Mission Details</h2>
+
+<div *ngIf="missionDetails">
+  <h3>{{ missionDetails.mission_name }} ({{ missionDetails.launch_year }})</h3>
+  <img [src]="missionDetails.links.mission_patch_small" alt="{{ missionDetails.mission_name }} logo">
+  <p>{{ missionDetails.details }}</p>
+</div>
+
+<button routerLink="/">Back</button>
