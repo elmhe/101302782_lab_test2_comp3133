@@ -1,11 +1,30 @@
-<div>
-    <ul>
-        <li *ngFor="let launch of launches">
-          <h3>{{ launch.mission_name }}</h3>
+<div class="container">
+  <h1>SpaceX Mission Launch List</h1>
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+  <app-missionfilter (yearFilter)="onYearFilter($event)"></app-missionfilter>
+
+  <!-- <div class="list-group list-group-item list-group-item-action" *ngFor="let mission of launches">
+    
+    <img src="{{ mission.links.mission_patch_small }}"/>
+    <h4>{{ mission.mission_name }}</h4>
+    <h6>{{ mission.launch_year }}</h6>
+    <h3>{{ mission.details }}</h3>
+    
+  </div> -->
+
+  <div>
+    <div *ngFor="let launch of filteredLaunches">
+      <div>
+        <img src="{{ launch.links.mission_patch_small }}" alt="{{ launch.mission_name }}" class="patch">
+        <div>
+          <h2>{{ launch.mission_name }}</h2>
           <p>Year: {{ launch.launch_year }}</p>
           <p>{{ launch.details }}</p>
-          <img [src]="launch.links.mission_patch_small" alt="Mission Patch">
-        </li>
-    </ul>
-</div>
+        </div>
+      </div>
+    </div>
+  </div>
 
+</div>

@@ -1,15 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-
-interface SpaceXLaunch {
-  mission_name: string;
-  launch_year: string;
-  details: string;
-  links: {
-    mission_patch_small: string;
-  };
-
-}
+import { NetworkService } from '../network/spacexapi.service';
+import { SpaceXLaunch } from '../models/mission';
 
 @Component({
   selector: 'app-missionlist',
@@ -20,13 +12,29 @@ interface SpaceXLaunch {
 export class MissionlistComponent implements OnInit {
 
   launches: SpaceXLaunch[] = [];
+  filteredLaunches: SpaceXLaunch[] = [];
 
-  constructor(private http: HttpClient) { }
+  constructor(private networkService: NetworkService) { }
 
   ngOnInit(): void {
-    this.http.get<SpaceXLaunch[]>('https://api.spacexdata.com/v3/launches').subscribe((data) => {
-      this.launches = data;
-    });
+    this.networkService.getAllMission()
+    .subscribe({
+      next: (data: any) => {
+        // console.log(data)
+        this.launches = data
+        this.filteredLaunches = data;
+      },
+      complete: () => {
+        console.log('Complete')
+      },
+      error: () => {
+        console.log('Error')
+      }
+    })
+  }
+
+  onYearFilter(year: string) {
+    this.filteredLaunches = this.launches.filter((launch) => launch.launch_year === year);
   }
 
 }
